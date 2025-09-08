@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>เริ่มต้น JavaScript</title>
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="app.js"></script> <!-- โหลด JS แบบ defer (ดีต่อประสิทธิภาพ) -->
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: system-ui, sans-serif;
+        margin: 0;
+        background: #111;
+        color: #eee;
+    }
+
+    .container {
+        max-width: 720px;
+        margin: 40px auto;
+        padding: 0 16px;
+    }
+
+    h1 {
+        margin-bottom: 16px;
+    }
+
+    .card {
+        background: #1a1a1a;
+        padding: 16px;
+        border-radius: 14px;
+        margin-bottom: 16px;
+        border: 1px solid #2a2a2a;
+    }
+
+    .counter {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+
+    button {
+        padding: 8px 12px;
+        border: 1px solid #333;
+        background: #222;
+        color: #eee;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #2a2a2a;
+    }
+
+    #count {
+        min-width: 40px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid #333;
+        background: #121212;
+        color: #eee;
+    }
+
+    .todo {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+        align-items: start;
+    }
+
+    #todoList {
+        list-style: none;
+        padding: 0;
+        margin: 12px 0 0;
+    }
+
+    #todoList li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 10px;
+        background: #171717;
+        border: 1px solid #2a2a2a;
+        border-radius: 10px;
+        margin-bottom: 8px;
+    }
+</style>
+
+<body>
+    <main class="container">
+        <h1>สวัสดี JavaScript 👋</h1>
+
+        <section class="card">
+            <h2>ตัวอย่าง 1: Counter</h2>
+            <div class="counter">
+                <button id="dec">-</button>
+                <span id="count">0</span>
+                <button id="inc">+</button>
+                <button id="reset">รีเซ็ต</button>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>ตัวอย่าง 2: โต้ตอบกับผู้ใช้</h2>
+            <input id="nameInput" placeholder="พิมพ์ชื่อของคุณ..." />
+            <p id="greet">สวัสดี…</p>
+        </section>
+
+        <section class="card">
+            <h2>ตัวอย่าง 3: สร้าง/ลบรายการ (DOM)</h2>
+            <div class="todo">
+                <input id="todoInput" placeholder="สิ่งที่ต้องทำ..." />
+                <button id="addTodo">เพิ่ม</button>
+                <ul id="todoList"></ul>
+            </div>
+        </section>
+    </main>
+    <script>
+        "use strict" // โหมดเข้มงวด ช่วยจับบั๊ก
+
+        // ==== ตัวอย่าง 1: Counter ====
+        const countEl = document.querySelector("#count")
+        const incBtn = document.querySelector("#inc")
+        const decBtn = document.querySelector("#dec")
+        const resetBtn = document.querySelector("#reset")
+
+        let count = 0
+        function renderCount() { countEl.textContent = count }
+
+        incBtn.addEventListener("click", () => { count++; renderCount() })
+        decBtn.addEventListener("click", () => { count--; renderCount() })
+        resetBtn.addEventListener("click", () => { count = 0; renderCount() })
+        renderCount()
+
+        // ==== ตัวอย่าง 2: โต้ตอบกับผู้ใช้ ====
+        const nameInput = document.querySelector("#nameInput")
+        const greetEl = document.querySelector("#greet")
+
+        nameInput.addEventListener("input", () => {
+            const name = nameInput.value.trim()
+            greetEl.textContent = name ? `สวัสดี ${name}! ยินดีต้อนรับสู่โลก JS` : "สวัสดี…"
+        })
+
+        // ==== ตัวอย่าง 3: จัดการ DOM (สร้าง/ลบรายการ) ====
+        const todoInput = document.querySelector("#todoInput")
+        const addTodoBtn = document.querySelector("#addTodo")
+        const todoList = document.querySelector("#todoList")
+
+        addTodoBtn.addEventListener("click", addTodo)
+        todoInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") addTodo()
+        })
+
+        function addTodo() {
+            const text = todoInput.value.trim()
+            if (!text) return
+            const li = document.createElement("li")
+            li.innerHTML = `<span>${escapeHtml(text)}</span> <button class="del">ลบ</button>`
+            li.querySelector(".del").addEventListener("click", () => li.remove())
+            todoList.appendChild(li)
+            todoInput.value = ""
+        }
+
+        function escapeHtml(s) {
+            return s.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")
+        }
+
+        // ==== ทริคดีบัก ====
+        console.log("พร้อมแล้ว! เปิด DevTools (F12) -> Console ดู log ได้");
+
+    </script>
+</body>
+
+</html>

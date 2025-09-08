@@ -4,19 +4,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD-Project</title>
+    <title>Todo-List</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="script.js"></script>
 </head>
 
 <body>
-    <div class="header">CRUD-Project</div>
+    <div class="header">Todo-List</div>
     <div class="card">
         <div class="card-box">
-            <div class="card-content">Content goes here</div>
+            <div class="card-content">
+                <h1>Count Example</h1>
+                <div class="counter">
+                    <button id="dec">-</button>
+                    <span id="count">0</span>
+                    <button id="inc">+</button>
+                    <button id="reset">Reset</button>
+                </div>
+
+            </div>
+        </div>
+        <div class="card-box">
+            <div class="card-content">
+                <h2>ตัวอย่าง 2: โต้ตอบกับผู้ใช้</h2>
+                <input id="nameInput" placeholder="พิมพ์ชื่อของคุณ..." />
+                <p id="greet">สวัสดี…</p>
+            </div>
+        </div>
+        <div class="card-box">
+            <div class="card-content">
+                <h2>ตัวอย่าง 3: สร้าง/ลบรายการ (DOM)</h2>
+                <div class="todo">
+                    <input id="todoInput" placeholder="สิ่งที่ต้องทำ..." />
+                    <button id="addTodo">เพิ่ม</button>
+                    <ul id="todoList"></ul>
+                </div>
+
+            </div>
         </div>
     </div>
-
 </body>
 
 </html>
