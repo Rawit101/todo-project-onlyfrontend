@@ -24,3 +24,14 @@ resetBtn.addEventListener("click", () => {
 })
 
 renderCount()
+
+// --- IGNORE ---
+
+const nameInput = document.querySelector("#nameInput")
+const greetEl = document.querySelector("#greet")
+
+nameInput.addEventListener("input", () => {
+    const name = nameInput.value.trim()
+    greetEl.textContent = name ? `Hello, ${name}!` : "Hello!"
+})
+
