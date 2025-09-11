@@ -9,32 +9,27 @@
 }
 
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
-
 }
 
 body {
+    font-family: system-ui, sans-serif;
+    margin: 0;
     background: #111;
     color: #eee;
-    font-family: "Public Sans", sans-serif;
 }
 
-.header {
-    text-align: left;
-    font-size: 3rem;
-    margin-top: 3rem;
-    margin-left: 19rem;
-}
-
-.card {
+.container {
     max-width: 720px;
     margin: 40px auto;
     padding: 0 16px;
 }
 
-.card-box {
+h1 {
+    margin-bottom: 16px;
+}
+
+.card {
     background: #1a1a1a;
     padding: 16px;
     border-radius: 14px;
@@ -42,57 +37,61 @@ body {
     border: 1px solid #2a2a2a;
 }
 
-button {
-    padding: 10px 20px;
-    border-radius: 8px;
-    border: none;
-    background-color: #333;
-    color: #eee;
-    margin-right: 50px;
-
+.counter {
+    display: flex;
+    gap: 8px;
+    align-items: center;
 }
 
-button:hover {
-    background-color: #555;
+button {
+    padding: 8px 12px;
+    border: 1px solid #333;
+    background: #222;
+    color: #eee;
+    border-radius: 10px;
     cursor: pointer;
 }
 
-button:active {
-    background-color: #777;
+button:hover {
+    background: #2a2a2a;
 }
 
-span {
-    font-weight: 600;
-    margin-right: 50px;
-}
-
-.card-content h1 {
-    font-size: 1.5rem;
-    margin-bottom: 8px;
+#count {
+    min-width: 40px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
 }
 
 input {
-    padding: 10px;
-    border-radius: 8px;
-    background-color: #222;
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #333;
+    background: #121212;
     color: #eee;
-    width: 60%;
-    margin-right: 20px;
 }
 
-input::placeholder {
-    color: #888;
+.todo {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    align-items: start;
 }
 
-input:focus {
-    outline: none;
+#todoList {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 0;
 }
 
-.card-content h2 {
-    margin-bottom: 20px;
-}
-
-.card-content p {
-    margin-top: 20px;
-    line-height: 1.6;
+#todoList li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    background: #171717;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    margin-bottom: 8px;
 }

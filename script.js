@@ -1,3 +1,5 @@
+"use strict"
+
 const countEl = document.querySelector("#count")
 const incBtn = document.querySelector("#inc")
 const decBtn = document.querySelector("#dec")
@@ -35,3 +37,36 @@ nameInput.addEventListener("input", () => {
     greetEl.textContent = name ? `Hello, ${name}!` : "Hello!"
 })
 
+
+// --- IGNORE ---
+
+const todoInput = document.querySelector("#todoInput")
+const addTodoBtn = document.querySelector("#addTodo")
+const todoList = document.querySelector("#todoList")
+
+addTodoBtn.addEventListener("click", addTodo)
+todoInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter")
+        addTodo()
+})
+
+function addTodo() {
+    const text = todoInput.value.trim()
+    if (!text) return
+
+    const li = document.createElement("li")
+    li.innerHTML = `<span>${escapeHTML(text)}</span> <button class="deleteBtn">Delete</button>`
+    li.querySelector(".del").addEventListener("click", () => li.remove())
+    todoList.appendChild(li)
+    todoInput.value = ""
+}
+
+
+function escapeHTML(s) {
+    return s
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;")
+}

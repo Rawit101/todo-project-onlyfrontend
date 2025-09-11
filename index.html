@@ -1,47 +1,96 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="th">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo-List</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="script.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>เริ่มต้น JavaScript</title>
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="app.js"></script> <!-- โหลด JS แบบ defer (ดีต่อประสิทธิภาพ) -->
 </head>
 
 <body>
-    <div class="header">Todo-List</div>
-    <div class="card">
-        <div class="card-box">
-            <div class="card-content">
-                <h1>Count Example</h1>
-                <div class="counter">
-                    <button id="dec">-</button>
-                    <span id="count">0</span>
-                    <button id="inc">+</button>
-                    <button id="reset">Reset</button>
-                </div>
+    <main class="container">
+        <h1>Hello Beginner JavaScript 👋</h1>
+
+        <section class="card">
+            <h2>Example 1: Counter</h2>
+            <div class="counter">
+                <button id="dec">-</button>
+                <span id="count">0</span>
+                <button id="inc">+</button>
+                <button id="reset">Reset</button>
             </div>
-        </div>
-        <div class="card-box">
-            <div class="card-content">
-                <h2>ตัวอย่าง 2: โต้ตอบกับผู้ใช้</h2>
-                <input id="nameInput" placeholder="พิมพ์ชื่อของคุณ..." />
-                <p id="greet">สวัสดี…</p>
+        </section>
+
+        <section class="card">
+            <h2>Example 2: User Interaction</h2>
+            <input id="nameInput" placeholder="Type your name..." />
+            <p id="greet">Hello…</p>
+        </section>
+
+        <section class="card">
+            <h2>Example 3: Create/Delete Items (DOM)</h2>
+            <div class="todo">
+                <input id="todoInput" placeholder="What needs to be done..." />
+                <button id="addTodo">Add</button>
+                <ul id="todoList"></ul>
             </div>
-        </div>
-        <div class="card-box">
-            <div class="card-content">
-                <h2>ตัวอย่าง 3: สร้าง/ลบรายการ (DOM)</h2>
-                <div class="todo">
-                    <input id="todoInput" placeholder="สิ่งที่ต้องทำ..." />
-                    <button id="addTodo">เพิ่ม</button>
-                    <ul id="todoList"></ul>
-                </div>
-            </div>
-        </div>
-    </div>
+        </section>
+    </main>
+    <script>
+        "use strict" // โหมดเข้มงวด ช่วยจับบั๊ก
+
+
+        const countEl = document.querySelector("#count")
+        const incBtn = document.querySelector("#inc")
+        const decBtn = document.querySelector("#dec")
+        const resetBtn = document.querySelector("#reset")
+
+        let count = 0
+        function renderCount() { countEl.textContent = count }
+
+        incBtn.addEventListener("click", () => { count++; renderCount() })
+        decBtn.addEventListener("click", () => { count--; renderCount() })
+        resetBtn.addEventListener("click", () => { count = 0; renderCount() })
+        renderCount()
+
+
+        const nameInput = document.querySelector("#nameInput")
+        const greetEl = document.querySelector("#greet")
+
+        nameInput.addEventListener("input", () => {
+            const name = nameInput.value.trim()
+            greetEl.textContent = name ? `Hello ${name}! Welcome to the world of JS` : "Hello…"
+        })
+
+
+        const todoInput = document.querySelector("#todoInput")
+        const addTodoBtn = document.querySelector("#addTodo")
+        const todoList = document.querySelector("#todoList")
+
+        addTodoBtn.addEventListener("click", addTodo)
+        todoInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") addTodo()
+        })
+
+        function addTodo() {
+            const text = todoInput.value.trim()
+            if (!text) return
+            const li = document.createElement("li")
+            li.innerHTML = `<span>${escapeHtml(text)}</span> <button class="del">ลบ</button>`
+            li.querySelector(".del").addEventListener("click", () => li.remove())
+            todoList.appendChild(li)
+            todoInput.value = ""
+        }
+
+        function escapeHtml(s) {
+            return s.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")
+        }
+
+        console.log("พร้อมแล้ว! เปิด DevTools (F12) -> Console ดู log ได้");
+
+    </script>
 </body>
 
 </html>
